@@ -1,0 +1,337 @@
+\documentclass[answers]{exam}
+\makeindex
+
+\usepackage{amsmath, amsfonts, amssymb, amstext, amscd, amsthm, makeidx, graphicx, hyperref, url, enumerate}
+\newtheorem{theorem}{Theorem}
+\allowdisplaybreaks
+
+\begin{document}
+
+\begin{center}
+{\Large Ma 3 - Problem Set 1} \\
+\medskip
+Marco Yang \\
+\medskip
+2237027
+\bigskip
+\end{center}
+
+\begin{questions}
+\question [20] In bridge, there are 4 players (A, B, C, D) and each player
+receives 13 cards from standard shuffled 52 card deck. What is the probability
+that
+
+\begin{parts}
+\part exactly 1 of 4 players has one ace and one king?
+
+\begin{solution}
+The probability that exactly 1 of the 4 players has one ace and one king
+is the ratio of the number of hands such that exactly 1 player has one ace
+and one king and the rest do not. Let a hand with one ace and one king be
+denoted as a valid hand.
+
+The number of ways we can choose one player to have a valid hand is
+
+\[
+    A = 4 \cdot 4^2 \cdot \binom{44}{11}
+\] 
+
+since there are 4 players from which we can choose one to have a valid hand,
+4 aces and 4 kings we can choose from to form a pair, and there are 44 
+remaining non-king and non-ace cards from which we can choose 11 cards 
+to create the rest of the hand.
+
+Now, we want the ways we can form the remaining hands such that no player
+has a king and an ace. This is the same as finding the complement of the 
+number of permutations of hands such that there is at least one valid hand.
+Notice that to count the complement, we only have to consider two cases:
+
+\begin{enumerate}
+    \item exactly 1 of the remaining 3 players has a valid hand
+    \item exactly 3 of the remaining 3 players has a valid hand (there is no
+        way for exactly 2 of the remaining 3 players to have a valid hand
+        because the last king and last ace that isn't in the hands of the 
+        first three players must go to the last player, in which case the last
+        player also has a valid hand)
+\end{enumerate}
+
+For the first case, the number ways we can choose exactly 1 remaining player 
+to have a valid hand is
+
+\[
+3 \cdot 3^2 \cdot \binom{33}{11} \cdot X
+\] 
+
+since there 3 remaining players from which we can choose one to have a valid
+hand, $3^2$ ways to choose an ace-king pair from the remaining cards, 33 
+remaining non-ace and non-king cards from which we choose 11 to complete the 
+hand, and $X$ is the number of ways we can choose the remaining two hands 
+such that neither hand is valid.
+
+Notice that $X$ is the complement of the number of ways we can choose the
+hands such that both of the remaining players have valid hands (we can't have
+exactly 1 out of the 2 remaining players to have a valid hand since that would
+cause the other player to also have a valid hand, as explained before). Thus
+the complement of $X$, which we denote $X^{c}$, is
+
+\[
+X^{c} = 2^2 \cdot \binom{22}{11}
+\] 
+
+since there are $2^2$ ways to choose an ace-king pair and 22 remaining 
+non-king and non-ace cards from which we choose 11 to complete the players 
+hand. We need not compute the number of ways to form the last players hand 
+since it's already predetermined by the other 3 players' hands.
+
+Thus, for case 1, the number of ways we can choose exactly 1 player out of 3 
+remaining players to have a valid hand is
+
+\[
+3 \cdot 3^2 \cdot \binom{33}{11} \cdot (1 - X^{c}) = 3 \cdot 3^2 \cdot \binom{33}{11} \cdot \left( \binom{26}{13} - 2^2 \cdot \binom{22}{11} \right) 
+.\] 
+
+For case 2, the number of ways we can we choose all 3 remaining players to have
+a valid hand is 
+
+\[
+3^2 \cdot \binom{33}{11} \cdot X^{c}
+\] 
+
+since there are $3^2 \cdot \binom{33}{11}$ ways for the first remaining player 
+to have a valid hand, and $X^{c}$ ways to have the last 2 remaining players to 
+also have valid hands. Thus, our final number of ways to have at least 1 out of
+the 3 remaining players to have valid hands is
+
+\[
+Y = 3 \cdot 3^2 \cdot \binom{33}{11} \cdot \left( \binom{26}{13} - 2^2 \cdot \binom{22}{11} \right) + 3^2 \cdot \binom{33}{11} \cdot 2^2 \cdot \binom{22}{11}
+.\] 
+
+Back to the original problem: we are looking to multiply the number of ways to
+have one player have a valid hand and the rest to have invalid hands. Thus, we
+are looking for the complement of the above number, which is 
+
+\[
+B = \binom{39}{13} \cdot \binom{26}{13} \cdot \binom{13}{13} - Y
+.\] 
+
+The total number of permutations of the four player's ahnds is
+
+\[
+\binom{52}{13} \cdot \binom{39}{13} \cdot \binom{26}{13} \cdot \binom{13}{3}
+\] 
+
+Putting it all together, the probability that exactly one player has a 
+valid hand is
+
+\[
+\frac{A \cdot B}{\binom{52}{13} \cdot \binom{39}{13} \cdot \binom{26}{13} \cdot \binom{13}{3}} = 0.3656
+.\] 
+\end{solution}
+
+\part player A and B each have exactly one ace?
+
+\begin{solution}
+There are $4 \cdot 3$ permutations for the ace that A and B receive, and 
+since there is an equal probability for each ace to give to each person,
+the probability that they get those aces is $(\frac{1}{4})^{2}$. The 
+probability that the other aces go to C and D is $(\frac{2}{4})^2$. Thus, our
+answer is 
+
+\[
+4 \cdot 3 \cdot \left( \frac{13}{52} \right) 
+\cdot \left( \frac{13}{51} \right) \cdot \left( \frac{26}{50} \right) 
+\cdot \left( \frac{25}{49} \right) = 0.2029
+.\] 
+\end{solution}
+\end{parts}
+
+\question [20] A club consists of 10 seniors, 12 juniors, and 15 sophomores.
+An organizing committee of size 5 is chosen randomly (with all subsets of size
+5 equally likely).
+
+\begin{parts}
+\part Find the probability that there are exactly 3 sophomores in the comittee.
+
+\begin{solution}
+There are $\binom{15}{3}$ combinations of juniors and $\binom{22}{2}$ combos
+of seniors/juniors. The total number of combinations is $\binom{37}{5}$. 
+Thus, the probability is
+
+\[
+P = \frac{\binom{15}{3}\binom{22}{2}}{\binom{37}{5}} = 0.2411
+.\] 
+\end{solution}
+
+\part Find the probability that the committee has at least one rep
+from each of the senior, junior, and sophomore classes.
+
+\begin{solution}
+I think the complement is easier to calculate. The probability that the 
+the committee is formed by at most 2 classes is the combinations of 5
+people chosen from only seniors/juniors, only juniors/sophs, and only
+seniors/sophs, minus the number of committees only formed by one class 
+since they overlap. 
+
+Thus,
+
+\begin{align*}
+    P &= 1 - \left(\frac{\binom{10 + 12}{5} + \binom{12 + 15}{5} + 
+    \binom{10 + 15}{5} - (\binom{10}{5} + \binom{12}{5} + 
+    \binom{15}{5})}{\binom{37}{5}}\right) \\ 
+    &= 0.6418
+.\end{align*}
+\end{solution}
+\end{parts}
+
+\question [15] Let $A$ and $B$ be events. The symmetric difference $A\Delta B$ 
+is defined to be the set of all elements that are in $A$ and $B$ but not both.
+In logic and engineering this event is alos called the XOR of $A$ and $B$. 
+Show that 
+
+\[
+P(A \Delta B) = P(A) + P(B) - 2P(A \cap B)
+.\] 
+
+\begin{solution}
+\begin{proof}
+By PIE, we know that 
+
+\[
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+.\] 
+
+Since $A \Delta B = (A \cup B) \setminus (A \cap B)$,
+
+\[
+P(A \Delta B) = P(A \cup B) - P(A \cap B) = P(A) + P(B) - 2P(A \cap B)
+.\] 
+\end{proof}
+\end{solution}
+
+\question [10] Suppose $A$ and $B$ are independent events. Show that $A^{c}$
+and $B^{c}$ are also independent.
+
+\begin{solution}
+\begin{proof}
+From DeMorgan's Law, we know that the intersection of the complements of 
+two sets is the complement of the union. Thus, we have
+
+\begin{align*}
+P(A^{c} \cap B^{c}) &= P((A \cup B)^{c}) \\ 
+&= 1 - P(A \cup B) \\ 
+&= 1 - (P(A) + P(B) - P(A \cap B)) \\
+&= 1 - P(A) - P(B) + P(A \cap B)
+.\end{align*}
+
+Since $A$ and $B$ are independent, we know that $P(A \cap B) = P(A)P(B)$.
+Thus,
+
+\begin{align*}
+P(A^{c} \cap B^{c}) &= 1 - P(A) - P(B) + P(A)P(B) \\ 
+&= (1 - P(A))(1 - P(B))
+.\end{align*}
+
+By definition, $P(A^{c}) = 1 - P(A)$ and $P(B^{c}) = 1 - P(B)$. Thus,
+
+\[
+P(A^{c} \cap B^{c}) = P(A^{c})P(B^{c})
+.\] 
+
+Thus, $A^{c}$ and $B^{c}$ fulfill the criteria for independence.
+\end{proof}
+\end{solution}
+
+\question [10] Two cards are distributed to each of three players from a 
+standard deck of 52 shuffled cards. What is the probability that at least two 
+of the three players have an ace with either a jack or a king?
+
+\begin{solution}
+There are two cases: exactly two of the three players have an ace with either 
+a jack or a king or exactly three players have an ace with either a jack or a 
+king.
+
+For the first case, there are $\binom{3}{2} = 3$ to choose the two players 
+who have an ace with either a jack or a king and the player who doesn't have 
+an ace with either a jack or a king. The probability that both selected 
+players satisfy the conditions is
+
+\[
+\frac{4 \cdot 8}{\binom{52}{2}} \cdot \frac{3 \cdot 7}{\binom{50}{2}}
+.\] 
+
+The probability that the third player does not have an ace with either
+a king or a jack is the complement of the probability that the third
+player does have an ace with a king or a jack, which is
+
+\[
+1 - \frac{2 \cdot 6}{\binom{48}{2}}
+.\] 
+
+Thus, the probability for the first case is
+
+\[
+P_1 = 3 \cdot \frac{4 \cdot 8}{\binom{52}{2}} \cdot \frac{3 \cdot 7}{\binom{50}{2}} \cdot \left( 1 - \frac{2 \cdot 6}{\binom{48}{2}} \right) 
+.\] 
+
+For the second case, there is $\binom{3}{3} = 1$ way to choose which players
+have an ace with either a jack or a king. The probability that all three have
+an ace with either a jack or a king is
+
+\[
+P_2 = \frac{4 \cdot 8}{\binom{52}{2}} \cdot \frac{3 \cdot 7}{\binom{50}{2}} \cdot \frac{2 \cdot 6}{\binom{48}{2}}
+.\] 
+
+Thus, our answer is
+
+\[
+P_1 + P_2 = 0.001232
+.\] 
+\end{solution}
+
+\question [25] Alice and Bob play a game. Alice has two blue chips, while Bob 
+has three red chips. They put all five chips into a bag, mix them up, then an 
+impartial referee removces them one at a time and returns them to the players.
+The winner is the first person to collect all their chips.
+
+\begin{parts}
+\part Determine the probability that Alice wins this game, and explain how you
+calculated your answer.
+
+\begin{solution}
+The probability that Alice wins is the probability of a permutation of 
+5 chips with the last chip being red, which is just
+
+\[
+    \frac{\binom{4}{2}}{\binom{5}{2}} = \frac{3}{5}
+.\] 
+\end{solution}
+\part In the next round, Alice has ony one blue chip, while Bob has six
+red chips. Now what is the probability that Alice wins, and why?
+
+\begin{solution}
+The probability that Alice wins is the probability of a permutation of 
+5 chips with the last chip being red, which is just the probability that 
+
+\[
+    \frac{\binom{6}{1}}{\binom{7}{1}} = \frac{6}{7}
+.\] 
+\end{solution}
+
+\part Make a conjecture for different numbers of red and blue chips.
+
+\begin{solution}
+Notice that our set of all permutations of the chips is the same as the
+set of all backwards permutations of the chips. Thus, WLOG, we can let
+the last chip be the first one we "choose" from the set of all chips. 
+Since the probability of Alice winning is the same as the last chip
+being red, it's just the probability that the first chip we choose from the
+bag is red, or the ratio of the red chips to all chips:
+
+\[
+\frac{\text{number of red chips}}{\text{number of total chips}}
+.\] 
+\end{solution}
+\end{parts}
+\end{questions}
+
+\end{document} 
