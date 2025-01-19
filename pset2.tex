@@ -1,0 +1,454 @@
+\documentclass[answers]{exam}
+\makeindex
+
+\usepackage{amsmath, amsfonts, amssymb, amstext, amscd, amsthm, makeidx, graphicx, hyperref, url, enumerate}
+\newtheorem{theorem}{Theorem}
+\allowdisplaybreaks
+
+\begin{document}
+
+\begin{center}
+{\Large Ma 3 Problem Set 2} \\
+\medskip
+Marco Yang \\
+\medskip
+2237027
+\bigskip
+\end{center}
+
+\begin{questions}
+\question[10]
+Show that \(P(A|B) \leq P(A)\) implies \(P(A|B^{c}) \geq P(A)\), and give an
+intuitive explanation of why this makes sense.
+
+\begin{solution}
+\begin{proof}
+We know that 
+\[
+P(A) = P(A | B) \cdot P(B) + P(A | B^{c}) \cdot P(B^{c})
+.\] 
+Since $P(A) \ge P(A|B)$ and $P(B^{c}) = 1 - P(B)$,
+\begin{gather*}
+P(A) = P(A | B) \cdot P(B) + P(A | B^{c}) \cdot P(B^{c}) \\
+P(A) \le P(A) \cdot P(B) + P(A | B^{c}) \cdot (1 - P(B)) \\ 
+P(A)(1 - P(B)) \le P(A|B^{c}) \cdot (1 - P(B)) \\ 
+P(A) \le P(A|B^{c}).
+\end{gather*}
+
+Intuitively, this makes sense because the probability of $A$ happening is the
+weighted sum of the probability that it happens given that either $B$ happens or
+$B$ doesn't happen. Thus, if the probability of $A$ happening given that $B$
+happens is lower than the overall weighted average, the probability that $A$
+happens given that $B$ doesn't happen needs to compensate by being higher than
+the weighted average.
+\end{proof}
+\end{solution}
+
+\question[10]
+According to the CDC (Centers for Disease Control and Prevention), men who smoke
+are 23 times more likely to develop lung cancer than men who don't smoke. Also
+according to the CDC, 21.6\% of men in the U.S. smoke. What is the probability
+that a man in the U.S. is a smoker, given that he develops lung cancer?
+
+\begin{solution}
+Let $S$ be the event that a man smokes and $L$ be the event that a man develops
+lung cancer.
+
+\[
+    P(S|L) = \frac{P(S \cap L)}{P(L)}
+.\] 
+
+Now, we have to find $P(S \cap L)$, the probability that a man smokes and has 
+lung cancer, and $P(L)$, the probability that any man has lung cancer. We
+are given that $P(S) = 0.216$ and $P(L|S) = 23 \cdot P(L|S^{c})$. Thus,
+
+\begin{align*}
+P(S \cap L) &= P(L|S) \cdot P(S) \\ 
+&= 23 \cdot P(L|S^{c}) \cdot 0.216 \\ 
+P(L) &= P(L|S) \cdot P(S) + P(L|S^{c}) \cdot P(S^{c}) \\ 
+&= 23 \cdot P(L|S^{c}) \cdot P(S) + P(L|S^{c}) \cdot (1 - P(S)) \\ 
+&= 23 \cdot P(L|S^{c}) \cdot 0.216 + P(L|S^{c}) \cdot 0.784. 
+\end{align*}
+
+Thus, 
+
+\begin{align*}
+P(S|L) &= \frac{P(S \cap L)}{P(L)} \\ 
+&= \frac{23 \cdot P(L|S^{c}) \cdot 0.216}{23 \cdot P(L|S^{c}) \cdot 0.216 + P(L|S^{c}) \cdot (0.784)} \\
+&= \frac{0.216 \cdot 23}{0.216 \cdot 23 + 0.784} \\
+&= 0.8636
+.\end{align*}
+\end{solution}
+
+\question[10]
+A hat contains 100 coins, where 99 are fair but one is double-headed (always
+landing Heads). A coin is chosen uniformly at random. The chosen coin is flipped
+7 times, and it lands Heads all 7 times. Given this information, what is the
+probability that the chosen coin is double-headed? (Of course, another approach
+here would be to look at both sides of the coin--but this is a metaphorical
+coin.)
+
+\begin{solution}
+Let $H$ be the event that the coin lands heads up all 7 times and $D$ be the
+even that the random coin is double-headed. We want to find
+
+\[
+P(D|H) = \frac{P(D \cap H)}{P(H)}
+.\] 
+
+Since $D$ and $H$ are independent, 
+
+\begin{align*}
+P(D \cap H) &= P(D) \cdot P(H|D) \\ 
+&= \frac{1}{100} \cdot 1^{7} \\ 
+&= \frac{1}{100}
+.\end{align*}
+
+We also have
+
+\begin{align*}
+P(H) &= P(H|D) \cdot P(D) + P(H|D^{c}) \cdot P(D^{c}) \\ 
+&= \frac{1}{100} + \left( \frac{1}{2} \right)^{7} \cdot \frac{99}{100}
+.\end{align*}
+
+Thus, our solution is
+
+\begin{align*}
+P(D|H) &= \frac{P(D \cap H)}{P(H)} \\ 
+&= 0.5639
+.\end{align*}
+\end{solution}
+
+\question[10]
+An experiment consists of throwing a fair coin four times. Find the probability
+mass function and the cumulative distribution function of the following random
+variables: (a) the number of heads before the first tail, (b) the number of
+heads following the first tail, (c) the number of heads minus the number of
+tails, and (d) the number of tails times the number of heads.
+
+\begin{parts}
+\part the number of heads before the first tail.
+
+\begin{solution}
+There are $2^{4}$ possible permutations for 4 coin flips. The number of
+permutations such that there are $x$ heads before the first tail is 
+$2^{4-(x+1)} = 2^{3-x}$ since the first $x$ flips are heads, the $x+1$-th flip
+is tails, and every flip afterwards can be whatever. The only exception is when
+$x=4$, since we don't put a tail afterwards, and there is only 1 way this can
+happen. Thus, the PMF is
+
+\[
+P(X=x) = \begin{cases}
+    \frac{1}{2}, & x = 0 \\
+    \frac{1}{4}, & x = 1 \\
+    \frac{1}{8}, & x = 2 \\
+    \frac{1}{16}, & x = 3 \\
+    \frac{1}{16}, & x = 4
+\end{cases}
+.\] 
+
+Summing the PMF, we have
+
+\[
+P(X \le x) = \begin{cases}
+    \frac{1}{2}, &x = 0 \\ 
+    \frac{3}{4}, &x = 1 \\ 
+    \frac{7}{8}, &x = 2 \\ 
+    \frac{15}{16}, &x = 3 \\ 
+    1, &x = 4 
+\end{cases}
+.\] 
+\end{solution}
+
+\part the number of heads following the first tail
+
+\begin{solution}
+TBH 4 flips is such a small number of flips that I think the cleanest way to do
+the problem is to just list all possible outcomes:
+
+\begin{center}
+HHHH
+HHHT
+HHTH
+HHTT
+HTHH
+HTHT
+HTTH
+HTTT
+THHH
+THHT
+THTH
+THTT
+TTHH
+TTHT
+TTTH
+TTTT
+\end{center}
+
+Based on the above outcomes, our PMF is
+
+\[
+P(X\le x) = \begin{cases}
+    \frac{5}{16}, \quad &x=0 \\
+    \frac{3}{8}, \quad &x=1 \\ 
+    \frac{1}{4}, \quad &x=2 \\ 
+    \frac{1}{16}, \quad &x=3
+\end{cases}
+.\] 
+
+Our CDF is 
+
+\[
+P(X\ge x) = \begin{cases}
+    \frac{5}{16}, \quad &x=0 \\
+    \frac{11}{16}, \quad &x=1 \\ 
+    \frac{15}{16}, \quad &x=2 \\ 
+    1, \quad &x=3
+\end{cases}
+.\] 
+\end{solution}
+
+\part the number of heads minus the number of tails
+
+\begin{solution}
+If the difference between the number of heads and tails is $d$, then the number
+of heads is 
+
+\[
+h + (h - d) = 4 \implies h = \frac{4 + d}{2}
+.\] 
+
+Since the number of heads must be an integer, we have $d=-4, -2, 0,2,4$. We 
+also have that the number of outcomes with precisely $(4 + d) / 2$ heads is
+
+\[
+    \binom{4}{\frac{4+d}{2}}
+.\] 
+
+Thus, our PMF is
+
+\[
+P(X=d) = \begin{cases}
+    \frac{1}{16}, \quad &d=-4 \\
+    \frac{1}{4}, \quad &d=-2 \\ 
+    \frac{3}{8}, \quad &d=0 \\ 
+    \frac{1}{4}, \quad &d=2 \\ 
+    \frac{1}{16}, \quad &d=4
+\end{cases} 
+.\] 
+
+Our CDF is
+
+\[
+P(X\ge d) = \begin{cases}
+    \frac{1}{16}, \quad &d=-4 \\
+    \frac{5}{16}, \quad &d=-2 \\ 
+    \frac{11}{16}, \quad &d=0 \\ 
+    \frac{15}{16}, \quad &d=2 \\ 
+    \frac{1}{16}, \quad &d=4
+\end{cases} 
+.\] 
+\end{solution}
+
+\part the number of tails times the number of heads
+
+\begin{solution}
+The support of $X$ is $0, 3, 4$.
+
+Our PMF is
+
+\[
+P(X=x) = \begin{cases}
+    \frac{1}{8}, \quad &x=0 \\
+    \frac{1}{2}, \quad &x=3 \\ 
+    \frac{3}{8}, \quad &x=4
+\end{cases} 
+.\] 
+
+Our CDF is
+
+\[
+P(X=x) = \begin{cases}
+    \frac{1}{8}, \quad &x=0 \\
+    \frac{5}{8}, \quad &x=3 \\ 
+    1, \quad &x=4
+\end{cases} 
+.\] 
+\end{solution}
+\end{parts}
+
+\question[10]
+Consider the binomial distribution with \(n\) trials and probability \(p\) of
+success on each trial. For what value of \(k\) is \(P(X=k)\) maximized? This
+value is called the mode of the distribution. (Hint: Consider the ratio of
+successive terms.)
+
+\begin{solution}
+The probability of $i$ successful trials is
+
+\begin{align*}
+P(X=i) &= p^{i} \cdot (1-p)^{n-i} \cdot \binom{n}{i} \\ 
+&= p^{i} \cdot (1-p)^{n-i} \cdot \frac{n!}{i!(n-i)!}
+.\end{align*}
+
+The ratio between successive terms is 
+
+\begin{align*}
+    \frac{P(X=i+1)}{P(X=i)} &= \frac{p^{i+1}(1-p)^{n-i-1}\frac{n!}{(i+1)!(n-i-1)!}}{p^{i} \cdot (1-p)^{n-i} \cdot \frac{n!}{i!(n-i)!}} \\ 
+    &= \frac{p(n-i)}{(1-p)(i+1)}
+.\end{align*}
+
+As long as $p(n-i) \ge (1-p)(i+1)$, the probability of $i$ successful
+trials is increasing. Solving for the maximum $i$ for which this is true,
+
+\begin{gather*}
+p(n-i) \ge (1-p)(i+1) \\ 
+pn - pi \ge  i + 1 - pi - p \\ 
+p(n+1) - 1 \ge i.
+\end{gather*}
+
+Since $k$ is the maximum $i + 1$,
+
+\[
+    k = \text{max}(i) + 1 = \left\lfloor p(n+1) \right\rfloor
+.\] 
+\end{solution}
+
+\question[10]
+Three players play 10 independent rounds of a game, and each player has
+probability \(\frac{1}{3}\) of winning each round. Find the joint distribution
+of the numbers of games won by each of the three players.
+
+\begin{solution}
+Let $a,b,c$ be the number of games each player wins, respectively. Then, for $a
++ b + c = 10$, 
+
+\[
+P(a,b,c) = \binom{10}{a} \cdot \binom{10 - a}{b} \cdot \binom{c}{c} \cdot 
+\left( \frac{1}{3} \right)^{a} \cdot \left( \frac{1}{3} \right) ^{b} \cdot \left( \frac{1}{3} \right) ^{c} 
+= \frac{\binom{10}{a} \cdot \binom{10 - a}{b}}{3^{10}}
+\] 
+
+since there are $\binom{10}{a}$ ways to choose the games that the first player
+wins, $\binom{10-a}{b}$ ways to choose the games that the second player wins, 
+$\binom{c}{c}$ ways to choose the games that the third player wins, and we
+multiply them together to find the total number of ways for each player to win
+their number of games. The probability that player 1 wins the games we assign
+them is $(\frac{1}{3})^{a}$, the probability that player 2 wins the games we
+assign them is $(\frac{1}{3})^{b}$, and same for player 3.
+\end{solution}
+
+\question[10]
+If \(X\) is a discrete uniform random variable, that is, \(P(X=k)=\frac{1}{n}\)
+for \(k=1,2,...,n\), find \(E(X)\) and \(\text{Var}(X)\).
+
+\begin{solution}
+\begin{align*}
+E(X) &= \sum_{k=1}^{n} \frac{1}{n} \cdot k \\ 
+&= \frac{n+1}{2} \\
+\text{Var}(X) &= E(X^2) - E(X)^2 \\ 
+&= \sum_{k=1}^{n} \frac{1}{n} k^2 - \left( \frac{n+1}{2} \right) ^2 \\ 
+&= \frac{(n+1)(2n+1)}{6} - \frac{(n+1)^2}{4} \\ 
+&= \frac{n^2 - 1}{12} 
+.\end{align*}
+\end{solution}
+
+\question[10]
+Let \(X\) be a random variable with mean 1 and variance 4. Find the linear
+transformation \(Y=aX+b\) such that \(Y\) has mean zero and variance one.
+
+\begin{solution}
+By the linearity of expectation,
+
+\begin{align*}
+E(Y) &= E(aX + b) \\ 
+&= E(aX) + E(b) \\ 
+&= aE(X) + b \\ 
+&= a + b \\ 
+\text{Var}(Y) &= \text{Var}(aX + b) \\ 
+&= a^2\text{Var}(X) \\ 
+&= 4a^2
+.\end{align*}
+
+Thus, for mean zero and variance one,
+
+\[
+\begin{cases}
+    a + b = 0 \\ 
+    4a^2 = 1
+\end{cases} \implies a = \frac{1}{2}, b = -\frac{1}{2} \text{ or } a = -\frac{1}{2}, b = \frac{1}{2}
+.\] 
+\end{solution}
+
+\question[10]
+Let \(X\) be a random variable that takes values \(1,2,3\) and \(4\), and we
+have \(P(X\geq 1)=1\), \(P(X\geq 2)=0.7\), \(P(X\geq 3)=0.2\), \(P(X\geq
+4)=0.1\), \(P(X>4)=0\). Compute \(E[X]\).
+
+\begin{solution}
+From the CDF, we have that the following:
+
+\[
+\begin{cases}
+    P(X=1) + P(X=2) + P(X=3) + P(X=4) = 1 \\ 
+    P(X=2) + P(X=3) + P(X=4) = 0.7 \\ 
+    P(X=3) + P(X=4) = 0.2 \\ 
+    P(X=4) = 0.1 \\ 
+\end{cases}
+.\] 
+
+This gives us
+
+\begin{align*}
+    P(X=1) &= 0.3 \\ 
+    P(X=2) &= 0.5 \\ 
+    P(X=3) &= 0.1 \\
+    P(X=4) &= 0.1
+.\end{align*}
+
+Thus
+
+\[
+E(X) = \sum_{i=1}^{4}i \cdot P(X=i) = 0.3 \cdot 1 + 0.5 \cdot 2 + 0.1 \cdot 3 +
+0.1 \cdot 4 = 2
+.\] 
+\end{solution}
+
+\question[10]
+Let \(X\) be a discrete random variable with probability mass function \(p(x)\)
+and let \(Y=g(X)\). Show that \(E(Y)=\sum_{x}g(x)p(x)\) provided that
+\(|g(x)|p(x)<\infty\).
+
+\begin{solution}
+$Y$ is a random variable since it is a composition of two functions: $X$ (random
+variables are just functions from sample space to $\mathbb{R}$), and $g$. Thus,
+the expected value of $Y$ is
+
+\begin{proof}
+\begin{align*}
+    E(Y) &= \sum_{s}^{}Y(s)P(\{s\}) \\ 
+    &= \sum_{s}^{} g(X(s)) P(\{s\})
+.\end{align*}
+
+Notice that we can group together sets of $s$ by their image $X(s)=x$. Thus,
+
+\begin{align*}
+    E(Y) &= \sum_{s}g(X(s)P(\{s\}) \\ 
+    &= \sum_{x}^{} g(x) \sum_{s:X(s) = x}^{} P(\{s\}) \\ 
+    &= \sum_{x}^{} g(x)p(x)
+.\end{align*}
+\end{proof}
+\end{solution}
+
+\question[10]
+\textbf{Extra credit.} A random square has a side length that is a uniform \([0,
+1]\) random variable. Find the expected area of the square.
+
+\begin{solution}
+\[
+    \mathbb{E}_{x \in [0,1]}[x^2] = \int_{0}^{1} x^2 \, dx = \frac{1}{3}
+.\] 
+\end{solution}
+\end{questions}
+
+\end{document}
