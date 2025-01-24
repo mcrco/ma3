@@ -1,0 +1,128 @@
+\documentclass[answers]{exam}
+\makeindex
+
+\usepackage{amsmath, amsfonts, amssymb, amstext, amscd, amsthm, makeidx, graphicx, hyperref, url, enumerate}
+\newtheorem{theorem}{Theorem}
+\allowdisplaybreaks
+
+\begin{document}
+
+\begin{center}
+{\Large Math 3 - Problem Set 3} \\
+\medskip
+Marco Yang \\
+\medskip
+2237027
+\bigskip
+\end{center}
+
+\begin{questions}
+\question[20] If $X,Y,Z$ are r.v.s s.t. $X$ and $Y$ are independent and $Y$ and
+$Z$ are indepdent, does it follow that $X$ and $Z$ are independent?
+
+\begin{solution}
+No. For example, we can let $X$ be the event that a fair coin, call it coin 1,
+lands heads, let $Y$ be the event that a second fair coin, call it coin 2, lands
+tials, and $Z$ be the event that coin 1 lands tails. Even though the outcomes of
+the first and second coins are independent, meaning $X$ and $Y$ are independent
+and $Y$ and $Z$ are independent, the outcomes of the same coin (coin 1) are not,
+meaning $X$ and $Z$ are dependent.
+\end{solution}
+
+\question[20]
+\begin{parts}
+\part A fair die is rolled. Find the expected value of the roll.
+
+\begin{solution}
+\[
+E(X) = \frac{1}{6} \left( 1 + 2 + 3 + 4 + 5 + 6 \right)  = 3.5
+.\] 
+\end{solution}
+
+\part Four fair dice are rolled. Find the expected total of the rolls.
+
+\begin{solution}
+By the linearity of expectation, the expected value of four rolls is 
+
+\[
+4 \cdot E(X) = 4 \cdot 3.5 = 14
+.\] 
+\end{solution}
+\end{parts}
+
+\question[20] Two teams are going to play a best-of-7 match (the match will end
+as soon as either team has won 4 games). Each game ends in a win for one team
+and a loss for the other team. Assume that each team is equally likely to win
+each game, and that the games played are independent. Find the mean and variance
+of the number of games played.
+
+\begin{solution}
+The total number of ways the best-of-7 can end is $2 \cdot \binom{7}{4}$
+since there are 2 ways to choose the team that wins and $\binom{7}{4}$ ways 
+to choose which games the winning team wins.
+
+The probability that exactly $i$ games are played is
+
+\[
+2 \cdot \binom{i - 1}{3}
+\] 
+
+since the last game must be won by the winning team (otherwise the best-of-7
+terminates earlier), and we from the remaining $i-1$ games we choose 3 games for
+the winning team to win.
+
+Thus, the expected value (mean) is 
+
+\[
+E(X) = \sum_{i=4}^{7} \frac{2 \cdot \binom{i-1}{3}}{2 \cdot \binom{7}{4}} \cdot i = 6.4
+.\] 
+
+The variance is the expected value of the squared difference between each
+outcome and the mean, which can be expressed as 
+
+\[
+\text{Var}(X) = E(X^2) + E(X)^2 = \sum_{i=4}^{7} \frac{2 \cdot \binom{i-1}{3}}{2 \cdot \binom{7}{4}} \cdot i^2 - 6.4^2 = 0.64
+.\] 
+\end{solution}
+
+\question[20] Let $X$ be a discrete r.v. with support $-n, -n + 1, \ldots, 0,
+\ldots, n- 1, n$ for some positive integer $n$. Suppose that the PMF of $X$
+satisfies the symmetry propert for all integers $k$. Find $E(X)$.
+
+\begin{solution}
+\[
+E(X) = \sum_{k=-n}^{n} p(k) \cdot k = 0 \cdot p(0) + \sum_{k=1}^{n} 
+\left( p(k) \cdot k + p(-k) \cdot (-k) \right) = \sum_{k=1}^{n} 
+\left( p(k) \cdot k - p(k) \cdot k \right) = \sum_{k=1}^{n} 0 = 0
+.\] 
+\end{solution}
+
+\question[20] An airline overbooks a flight, selling more tickets for the flight
+than there are seats on the plane (figuring that it’s likely that some people
+won’t show up). The plane has 100 seats, and 110 people have booked the flight.
+Each person will show up for the flight with probability 0.9, independently.
+Find the probability that there will be enough seats for everyone who shows up
+for the flight.
+
+\begin{solution}
+I think it's easier to find the complement of the probability that there are
+enough seats. This happens when there are at most $9$ be people who don't show
+up. The probability that this happens is 
+
+\[
+\sum_{i=0}^{9} \binom{110}{i} \cdot (0.1)^{i} \cdot (0.9)^{110 - i}
+\] 
+
+since there are $\binom{110}{i}$ ways to choose the $i$ people that don't show
+up, the probability that none of them show up is $(0.1)^{i}$, and the
+probability that everyone else does show up is $(0.9)^{110 - i}$.
+
+Thus, the probability that there are enough seats is 
+
+\[
+1 - \sum_{i=0}^{9} \binom{110}{i} \cdot (0.1)^{i} \cdot (0.9)^{110 - i} = 0.6710
+.\] 
+\end{solution}
+\end{questions}
+
+\end{document}
