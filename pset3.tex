@@ -57,31 +57,28 @@ each game, and that the games played are independent. Find the mean and variance
 of the number of games played.
 
 \begin{solution}
-The total number of ways the best-of-7 can end is $2 \cdot \binom{7}{4}$
-since there are 2 ways to choose the team that wins and $\binom{7}{4}$ ways 
-to choose which games the winning team wins.
-
 The probability that exactly $i$ games are played is
 
 \[
-2 \cdot \binom{i - 1}{3}
+2 \cdot \binom{i - 1}{3} \cdot \left( \frac{1}{2} \right) ^{i}
 \] 
 
 since the last game must be won by the winning team (otherwise the best-of-7
 terminates earlier), and we from the remaining $i-1$ games we choose 3 games for
-the winning team to win.
+the winning team to win. The probability that all of the $i$ games goes to the 
+designated team is $(\frac{1}{2})^{i}$.
 
 Thus, the expected value (mean) is 
 
 \[
-E(X) = \sum_{i=4}^{7} \frac{2 \cdot \binom{i-1}{3}}{2 \cdot \binom{7}{4}} \cdot i = 6.4
+E(X) = \sum_{i=4}^{7} 2 \cdot \binom{i-1}{3} \cdot \left( \frac{1}{2} \right)^i \cdot i = 5.8125
 .\] 
 
 The variance is the expected value of the squared difference between each
 outcome and the mean, which can be expressed as 
 
 \[
-\text{Var}(X) = E(X^2) + E(X)^2 = \sum_{i=4}^{7} \frac{2 \cdot \binom{i-1}{3}}{2 \cdot \binom{7}{4}} \cdot i^2 - 6.4^2 = 0.64
+\text{Var}(X) = E(X^2) - E(X)^2 = \sum_{i=4}^{7} 2 \cdot \binom{i-1}{3} \cdot \left( \frac{1}{2} \right)^i \cdot i^2 - 5.8125^2 = 1.02734
 .\] 
 \end{solution}
 
