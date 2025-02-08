@@ -1,0 +1,331 @@
+\documentclass[answers]{exam}
+\makeindex
+
+\usepackage{amsmath, amsfonts, amssymb, amstext, amscd, amsthm, makeidx, graphicx, hyperref, url, enumerate}
+\newtheorem{theorem}{Theorem}
+\allowdisplaybreaks
+
+\begin{document}
+
+\begin{center}
+{\Large Ma 3 - Problem Set 4} \\
+\medskip
+Marco Yang \\
+\medskip
+2237027
+\bigskip
+\end{center}
+
+\begin{questions}
+\question [20]
+\begin{parts}
+\part Let $p_0,p_1,\ldots,p_{n}$ denote the probability mass function of the
+binomial distribution with parameters $n$ and $p$. Let $q = 1-p$. Show that the
+binomial probabilities can be computed recursively by $p_0=q^{n}$ and $p_{k}=
+(kq)^{-1} \cdot (n - k + 1) \cdot p \cdot p_{k-1}$, for $k=1,2,\ldots,n$. Use
+this relation to find $P(X\le 4)$ for $n=9000$ and $p=0.0005$.
+
+\begin{solution}
+The formula for the PMF of a binomial distribution with parameters $n$ and $p$
+is
+
+\[
+p_{i} = \binom{n}{i} \cdot p^{i} \cdot q^{n - i}
+.\] 
+
+Then, plugging in $i=0$ gives us
+
+\[
+p_0 = \binom{n}{0} \cdot p^{0} \cdot q^{n - 0} = q^{n}
+.\] 
+
+Plugging in $i=k-1$,
+
+\[
+p_{k-1} = \binom{n}{k-1} \cdot p^{k-1} \cdot q^{n - (k-1)}
+.\] 
+
+Plugging in $i=k$, we derive
+
+\begin{align*}
+p_{k} &= \binom{n}{k} \cdot p^{k} \cdot (1 - p)^{n-k} \\ 
+&= \frac{n!}{k!(n-k)!} \cdot p \cdot p^{k-1} \cdot q^{-1} \cdot q^{n-(k-1)} \\ 
+&= \frac{n!}{(k-1)!(n-(k-1)!)} \cdot \frac{n - (k-1)}{k} \cdot p \cdot p^{k-1} \cdot q^{-1} \cdot q^{n-(k-1)} \\ 
+&= (kq)^{-1} \cdot (n - k + 1) \cdot p \cdot \binom{n}{k-1} \cdot p^{k-1} \cdot
+q^{n-(k-1)} \\ 
+&= (kq)^{-1} \cdot (n-k+1) \cdot p \cdot p_{k-1}
+.\end{align*}
+\end{solution}
+
+\part Show that the Poisson probablities $p_0,p_1,..,$ (i.e. the PMF) can be
+computed recursively by $p_0=\exp(-\lambda)$ and $(\lambda / k)\cdot p_{k-1}$.
+Use this scheme to find $P(X\le 4)$ for $\lambda=4.5$ How does part b relate to
+a?
+
+\begin{solution}
+The formula for the PMF of the Poisson distribution is
+
+\[
+p_{i} = \frac{e^{-\lambda}\lambda^{i}}{i!}
+.\] 
+
+Plugging in $i=0$,
+
+\[
+p_{0} = \frac{e^{-\lambda}\lambda^{0}}{0!} = e^{-\lambda}
+.\] 
+
+Plugging in $i=k-1$,
+
+\[
+p_{k-1} = \frac{e^{-\lambda}\lambda^{k-1}}{(k-1)!}
+.\] 
+
+Starting with the formula for $p_{k}$, we derive
+
+\begin{align*}
+p_{k} &= \frac{e^{-\lambda}\lambda^{k}}{k!} \\ 
+&= \frac{e^{-\lambda} \cdot \lambda^{k-1}}{(k-1)!} \cdot \frac{\lambda}{k} \\ 
+&= \frac{\lambda}{k} \cdot p_{k-1}
+.\end{align*}
+\end{solution}
+\end{parts}
+
+\question [15] The Cauchy cumulative distribution function is 
+
+\[
+F(x) = \frac{1}{2} + \frac{1}{\pi} \cdot \tan^{-1}(x), \, -\infty < x < \infty
+.\] 
+
+\begin{parts}
+\part [5] Show that this is a cdf.
+
+\begin{solution}
+A valid cdf must be increasing, right-continuous, and converge to 0 and 1.
+The derivative of $F$ w.r.t. $x$ is 
+
+\[
+\frac{d}{dx} F(x) = \frac{d}{dx} \frac{1}{2} + \frac{1}{\pi} \cdot \tan^{-1}(x)
+= \frac{1}{\pi} \cdot \frac{1}{(1+x)^2}
+.\] 
+
+Since $(1+x)^2 > 0$, $\frac{1}{\pi} \cdot \frac{1}{(1+x)^2} > 0$ for all $x$,
+and $F$ is increasing.
+
+Since $\arctan$ is continuous and $\frac{1}{2}$ is continuous and 
+$F$ is continuous as well.
+
+\begin{align*}
+\lim_{x \to -\infty} F(x) &= \lim_{x \to -\infty} \frac{1}{2} + \frac{1}{\pi} \cdot \tan^{-1}(x) \\ 
+&= \frac{1}{2} + \frac{1}{\pi} \cdot -\frac{\pi}{2} \\ 
+&= \frac{1}{2} - \frac{1}{2} \\ 
+&= 0 \\
+\lim_{x \to \infty} F(x) &= \lim_{x \to \infty} \frac{1}{2} + \frac{1}{\pi}\cdot \tan^{-1}(x) \\ 
+&= \frac{1}{2} + \frac{1}{\pi} \cdot \frac{\pi}{2} \\ 
+&= \frac{1}{2} + \frac{1}{2} \\
+&= 1
+.\end{align*}
+
+Thus, $F(x)$ is a cdf.
+\end{solution}
+
+\part [5] Find the density function.
+
+\begin{solution}
+Since the CDF is the accumulation (integral) of the density function, we can 
+find the density by taking the derivative of $F$:
+
+\begin{align*}
+p(x) &= \frac{d}{dx} F(x) \\ 
+&= \frac{d}{dx} \frac{1}{2} + \frac{1}{\pi} \cdot \tan^{-1}(x) \\
+&= \frac{1}{\pi} \cdot \frac{1}{(1+x)^2}  \\
+&= \frac{1}{\pi(1+x)^2}  \\
+.\end{align*}
+\end{solution}
+
+\part [5] Find $x$ s.t. $P(X > x) = 0.1$.
+
+\begin{solution}
+We know that $P(X \le x) = 1 - P(X > x)$. Thus, $P(X > x) = 0.1 \implies 
+P(X \le x) = 0.9$. Solving for this,
+
+\[
+P(X \le x) = 0.9 \implies \frac{1}{2} + \frac{1}{\pi} \cdot \tan^{-1}(x) = 0.9
+\implies \tan^{-1}(x) = 0.4\pi \implies x = \tan(0.4) = 0.423
+.\] 
+\end{solution}
+\end{parts}
+
+\question [15] Geometric R.V.
+\begin{parts}
+\part [5] Find an expression for the cumulative distribution function of a
+geometric random variable. 
+
+\begin{solution}
+Using the formula for the sum of a finite geometric series,
+
+\begin{align*}
+    F(k) &= \sum_{i=0}^{k} q^{k}p \\
+    &= p \cdot \frac{1-q^{k}}{1-q} \\ 
+    &= 1-q^{k}
+.\end{align*}
+
+The proof for the sum of the finite geometric series with ratio $r$ is below:
+
+\begin{align*}
+    S_{k} &= \sum_{i=0}^{k} q^{k} \\ 
+    S_{k} &= 1 + q + q^2 + \ldots + q^{k} \\ 
+    qS_{k} &= q + q^2 + q^3 + \ldots + q^{k + 1} \\ 
+    S_{k} - qS_{k} &= 1 - q^{k+1} \\ 
+    S_{k} &= \frac{1 - q^{k + 1}}{1-q}
+.\end{align*}
+
+Intuitively, the formula for the CDF makes sense because it is equivalent to the
+complement of the probability that the non-favorable case happens at least $k$
+times in a row.
+\end{solution}
+
+\part [5] If $X$ is a geometric random variable with $p=0.5$, for what value of
+$k$ is $P(X\le k) = 0.99$?
+
+\begin{solution}
+\[
+P(x \le k) = 1-q^{k} = 1 - 0.5^{k} = 0.99 \implies k = 6.64
+.\] 
+\end{solution}
+
+\part [5] If $X$ is a geometric random variable, show that 
+
+\[
+P(X > n + k - 1 | X > n - 1) = P(X > k)
+.\] 
+
+The result above is an example of a ``memoryless'' stochastic phenomenom, i.e.
+if we know that $X$ is larger than some value $n-1$ then asking whether it is
+larger than $(n - 1) + k$ is the same as asking whether it is larger than $k$.
+
+\begin{solution}
+\begin{proof}
+Let $p,q$ be the associate probabilities for the geometric r.v. Using the
+complement of the CDF, we have 
+
+\[
+P(X > k) = 1 - P(X \le k) = q^{k}
+.\] 
+
+Applying Bayes' Theorem, 
+
+\begin{align*}
+P(X > n + k - 1 | X > n - 1) &= \frac{P(X > n - 1 | X > n + k - 1) P(X > n +k - 1)}{P(X > n - 1)} \\ 
+&= \frac{1 \cdot q^{n + k - 1}}{q^{n - 1}} \\
+&= q^{k} \\
+&= P(X > k)
+.\end{align*}
+\end{proof} 
+\end{solution}
+\end{parts}
+
+\question [15] Suppose that the liftime of an electronic component follows an
+exponential distribution with $\lambda=0.1$.
+
+\begin{parts}
+\part [5] Find the probability that the lifetime is less than 10.
+
+\begin{solution}
+The CDF of a exponential distribution is
+
+\[
+P(X \le k) = 1 - e^{-\lambda k}
+.\] 
+
+Thus,
+
+\[
+P(X \le 10) = 1 - e^{-0.1 \cdot 10} = 0.6321
+.\] 
+\end{solution}
+
+\part [5] Find the probability that the lifetime is between 5 and 15.
+
+\begin{solution}
+The probability that the lifetime is between 5 and 15 is the same as the
+probability that it's less than 15 but not less than 5.
+
+\[
+P(5 \le X \le 15) = P(X \le 15) - P(X \le 5) = 0.3834
+.\] 
+\end{solution}
+
+\part [5] Find $t$ s.t. the probability that the lifetime is greater than $t$ is
+$0.01$.
+
+\begin{solution}
+\[
+P(X > t) = 1 - (1 - e^{-0.1 \cdot t}) = 0.01 \implies t = 46.0517
+.\] 
+\end{solution}
+\end{parts}
+
+\question [10] Alice works from home and receives Slack messages from her boss
+at intervals of a Poisson process with $\lambda=2$ per hour.
+
+\begin{parts}
+\part [5] If Alice takes a 10 minute walk around the block with her dog, what is
+the probability that she gets a message during that time?
+
+\begin{solution}
+Our adjusted lambda would be the rate of Slack messages per 10 minutes, which is
+
+\[
+\lambda' = \frac{2}{\text{hr}} \cdot \frac{\text{hr}}{60\text{ min}} \cdot 10 = \frac{1}{3}
+.\] 
+
+Thus, the probability of receiving no messages in 10 minutes is
+
+\[
+P(X > 0) = 1 - P(X = 0) = 1 - \frac{e^{-\lambda} \cdot \lambda^{0}}{0!} = 1 - e^{-\frac{1}{3}} = 0.2835
+.\]  
+\end{solution}
+
+\part [5] How long can her walk be if she wishes the probability of receiving no
+message to be at most $0.5$?
+
+\begin{solution}
+The adjusted lambda for $t$ duration of time is $\lambda' = \lambda \cdot t = 2t
+/ \text{hr}$. Thus, the probability of no messages within $t$ time is
+
+\[
+P(X = 0) = \frac{e^{-\lambda'} \cdot \lambda'^{0}}{0!} = e^{-2t}
+.\]  
+
+Our contraint is $P(X=0) \le 0.5$, so
+
+\[
+e^{-2t} < 0.5 \implies t < \frac{\ln 2}{2} = 0.3656 \text{ hours}
+.\] 
+\end{solution}
+\end{parts}
+
+\question [15] If $X \sim N (0, \sigma^2)$, find the density of $Y=|X|$.
+
+\begin{solution}
+The PDF for $X \sim N(0, \sigma^2)$ is
+
+\[
+f(x) = \frac{1}{\sqrt{2\pi}\sigma} \exp \left( -\frac{x^2}{2\sigma^2} \right) 
+.\] 
+
+Since we want the density of $Y=|X|$, the support is $x \ge 0$, with the
+probability density of all $x>0$ being doubled since the probability of the
+negative counterpart is added. Thus, the PDF for $Y=|X|$ is
+
+\[
+f'(x) = \begin{cases}
+\frac{\sqrt{2}}{\sqrt{\pi}\sigma} \exp \left( -\frac{x^2}{2\sigma^2} \right) , &\quad x > 0  \\ 
+\frac{1}{\sqrt{2\pi}\sigma} \exp \left( -\frac{x^2}{2\sigma^2} \right) , &\quad x = 0
+\end{cases}
+.\] 
+\end{solution}
+\end{questions}
+
+\end{document}
