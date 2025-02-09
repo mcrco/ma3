@@ -222,7 +222,7 @@ $k$ is $P(X\le k) = 0.99$?
 
 \begin{solution}
 \[
-P(x \le k) = 1-q^{k} = 1 - 0.5^{k} = 0.99 \implies k = 6.64
+P(x \le k) = 1-q^{k+1} = 1 - 0.5^{k+1} = 0.99 \implies k = 5.64
 .\] 
 \end{solution}
 
@@ -249,7 +249,7 @@ Applying Bayes' Theorem,
 
 \begin{align*}
 P(X > n + k - 1 | X > n - 1) &= \frac{P(X > n - 1 | X > n + k - 1) P(X > n +k - 1)}{P(X > n - 1)} \\ 
-&= \frac{1 \cdot q^{n + k - 1 + 1}}{q^{n - 1}} \\
+&= \frac{1 \cdot q^{n + k - 1 + 1}}{q^{n - 1+1}} \\
 &= q^{k + 1} \\
 &= P(X > k)
 .\end{align*}
@@ -312,7 +312,7 @@ Our adjusted lambda would be the rate of Slack messages per 10 minutes, which is
 \lambda' = \frac{2}{\text{hr}} \cdot \frac{\text{hr}}{60\text{ min}} \cdot 10 = \frac{1}{3}
 .\] 
 
-Thus, the probability of receiving no messages in 10 minutes is
+Thus, the probability of receiving at least one message in 10 minutes is
 
 \[
 P(X > 0) = 1 - P(X = 0) = 1 - \frac{e^{-\lambda} \cdot \lambda^{0}}{0!} = 1 - e^{-\frac{1}{3}} = 0.2835
