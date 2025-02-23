@@ -1,0 +1,368 @@
+\documentclass[answers]{exam}
+\makeindex
+
+\usepackage{amsmath, amsfonts, amssymb, amstext, amscd, amsthm, makeidx, graphicx, hyperref, url, enumerate}
+\newtheorem{theorem}{Theorem}
+\allowdisplaybreaks
+
+\begin{document}
+
+\begin{center}
+{\Large Ma 3 - Midterm} \\
+\medskip
+Marco Yang \\
+\medskip
+2237027
+\bigskip
+\end{center}
+
+\begin{questions}
+\question[10] A fair six-sided die is rolled once. Define the following events:
+
+A: The result is even
+
+B: The result is multiple of 3
+
+C: The result is greater than 4
+
+\begin{parts}
+\part Find $P(A), P(B), and P(C)$.
+
+\begin{solution}
+\begin{align*}
+    P(A) &= \frac{3}{6} = \frac{1}{2} \\ 
+    P(B) &= \frac{2}{6} = \frac{1}{3} \\ 
+    P(C) &= \frac{2}{6} = \frac{1}{3}
+.\end{align*}
+\end{solution}
+
+\part Find $P(A \cup B)$, the probability of rolling either an even number or a
+multiple of 3.
+
+\begin{solution}
+The numbers that satisfy either probability are $2,3,4,6$. Thus
+
+\[
+P(A \cup B) = \frac{4}{6} = \frac{2}{3}
+.\] 
+\end{solution}
+
+\part Find $P(A \cap C)$, the probability of rolling a number that is both even
+and greater than 4.
+
+\begin{solution}
+The only number that satisfies both conditions is 6. Thus,
+
+\[
+P(A \cap C) = \frac{1}{6}
+.\] 
+\end{solution}
+
+\part Are events A and B mutually exclusive? Why?
+
+\begin{solution}
+No. There is an overlapping case with the number 6, which is both even and a
+multiple of 3.
+\end{solution}
+\end{parts}
+
+\question[5] A fair coin is tossed four times. What is the probability that the
+number of heads appearing on the first two tosses is equal to the number of
+heads appearing on the second two tosses?
+
+\begin{solution}
+Let $P(X)$ be the probability that the number of heads in 2 tosses is $X$. Since
+we know the first two and second two tosses are independent, we have that the
+probability of both the first two and second two tosses having $X$ heads is 
+
+\[
+\sum_{X}^{} P(X)^2 = \sum_{i=0}^{2} P(i)^2 = \left( \frac{1}{4} \right) ^2 + \left( \frac{1}{2} \right) ^2 + \left( \frac{1}{4} \right) ^2 = \frac{3}{8}
+.\] 
+
+We can also list out all permutations and see that $TTTT, THTH, HTHT, HTTH,
+THHT, HHHH$ are the only 6 valid permutations out of the 16.
+\end{solution}
+
+\question[5] 5 fair dice are rolled. What is the probability that the faces
+showing constitute a ``full'' house -- that is, three faces show one number and
+two faces show a second number?
+
+\begin{solution}
+There are 6 ways of choosing the number that appears twice and 5 ways of
+choosing the number that appears thrice. Thus, the total number of ways we can
+pick the numbers for the full house is $5 \cdot 6 = 30$.
+
+There are $\binom{5}{3} = 10$ ways of choosing which dice show the number that appear
+thrice and which dice show the number that appear twice.
+
+Lastly, the probability that each dice rolls the way we have designated them to
+is $\frac{1}{6}^{5}$.
+
+Thus, our probability of a full house is
+
+\[
+30 \cdot 10 \cdot \frac{1}{6^{5}} = 0.03858
+.\] 
+\end{solution}
+
+\question[10] Prove that successive terms in the sequence $\binom{n}{0}, \ldots,
+\binom{n}{n}$ first increase then decrease. For what value(j) of $j$ is 
+$\binom{n}{j}$ maximized?
+
+\begin{solution}
+The ratio between successive terms is 
+
+\[
+r = \frac{\binom{n}{j+1}}{\binom{n}{j}} = \frac{n!}{(j+1)!(n - j - 1)!} \cdot \frac{j!(n-j)!}{n!} = \frac{n-j}{j+1}
+.\] 
+
+Thus, as long as $n-j > j-1$, the terms are increasing. Notice that after $n-j <
+j-1$, the $\binom{n}{j}$ is decreasing. Since $j$ increases from $0$ to $n$
+throughout the sequence, $n-j$ gets smaller while $j-1$ gets larger, and teh
+sequence of binomial coefficientrs must be increasing then decreasing.
+
+To find the maximizing values for $j$, we need to find the numbers for which
+this pattern is non-decreasing, or $n-j \ge j-1$. Using this formula, we know
+that $\binom{n}{j}$ is maximized when it is no longer non-decreasing, which is
+$\frac{n}{2}$ for even $n$ and $\left\lfloor \frac{n}{2} \right\rfloor,
+\left\lfloor \frac{n}{2} \right\rfloor+1$ for odd $n$.
+\end{solution}
+
+\question[10] A company ships products from three different warehouses (A, B,
+and C). Based on customer complaints, it appears that 3\% of the shipments
+coming from A are somehow faulty, as are 5\% of the shipments coming from B, and
+2\% coming from C. Suppose a customer is mailed an order and calls in a
+complaint the next day. What is the probability the item came from Warehouse C?
+Assume that Warehouses A, B, and C ship 30\%, 20\%, and 50\% of the sales,
+respectively.
+
+\begin{solution}
+We are looking for
+
+\[
+\frac{\text{Share of faults from C}}{\text{Share of faults}}
+.\] 
+
+Above, ``Share of $X$'' refers to the percentage share of items of type $X$ with
+respect to the total inventory.
+
+The share of faulty proudcts from $C$ is 
+
+\[
+0.02 \cdot 0.5 = 0.01
+.\] 
+
+The share of faulty products in general is
+
+\[
+0.03 \cdot 0.3 + 0.05 \cdot 0.2 + 0.02 \cdot 0.5 = 0.11
+.\] 
+
+Thus, the probability that the item came from Warehouse C is $\frac{1}{11}$.
+\end{solution}
+
+\question[15] Let $X$ be an exponentai r.v. with standard deviation $\sigma$.
+Find $P(|XE(X)|>k\sigma)$ for $k=2,3,4$ and compare the results to the bounds
+from Chebyshev's inequality.
+
+\begin{solution}
+For exponential r.v.s,
+
+\begin{align*}
+    E(X) &= \frac{1}{\lambda} = \sigma \\
+    Var(X) &= \frac{1}{\lambda^2} = \sigma^2
+.\end{align*}
+
+We know that the standard deviation is the square root of the variance, which is
+the square of the expected value. Thus, the standard deviation is the expected
+value. Since we know $X$ only takes on positive values,
+
+\[
+P(|XE(X)| > k\sigma) = P(X\sigma > k\sigma) = P(X > k) = 1 - P(X \le k) = 1 - (1 - e^{-\lambda k})
+= e^{-\frac{k}{\sigma}}
+.\] 
+
+Because this has the $\sigma$ term in it still, I'm assuming the problem meant
+to ask $P(|X - E(X)| > k\sigma)$? If so,
+
+\begin{align*}
+P(|X-E(X)| > k\sigma) &= P(X-\sigma > k\sigma) \\
+&= P(X > (k+1)\sigma)  \\ 
+&= 1 - P(X \le (k+1)\sigma) \\ 
+&= 1 - (1 - e^{-\lambda (k+1)\sigma}) \\
+&= e^{-(k+1)}
+.\end{align*}
+
+Chebyshev's Inequality states
+
+\[
+P(|X - E(X)| \ge a) \le \frac{\sigma^2}{a^2}
+.\] 
+
+Thus, if $a = k\sigma$,
+
+\[
+P(|X - E(X)| \ge k\sigma) \le \frac{\sigma^2}{k^2\sigma^2} = \frac{1}{k^2}
+.\] 
+
+Now, for $k=2,3,4$,
+
+\begin{align*}
+P(|X - E(X)| > 2\sigma) &= e^{-(2+1)} = 0.04979 \le \frac{1}{4} = 0.25 \\ 
+P(|X - E(X)| > 3\sigma) &= e^{-(3+1)} = 0.01832 \le \frac{1}{9} = 0.1111 \\ 
+P(|X - E(X)| > 2\sigma) &= e^{-(4+1)} = 0.006738 \le \frac{1}{16} = 0.00675 \\ 
+.\end{align*}
+
+It's clear that as $k$ increases, the Chebyshev bound gets sharper rapidly.
+\end{solution}
+
+\question[10] Suppose $X$ is a binomial r.v. with $n=4$ and $p=2 / 3$. What is
+the pdf of $2X + 1$?
+
+\begin{solution}
+Let $Y = 2X + 1$. $Y$ must be odd and is limited by the support of $X$, so we limit 
+our support to only odd integers from $1$ through $2n + 1$. Let $P$ be the pdf
+of $Y$ and $Q$ be the binompdf for $X$. We know 
+
+\[
+P(Y = y) = Q(X = \frac{y-1}{2})
+.\] 
+
+Plugging in the binompdf formula for $n=4$ and $p=2 / 3$,  
+
+\[
+P(Y = y) = \begin{cases}
+(\frac{2}{3})^{\frac{y-1}{2}}\left( \frac{1}{3} \right)^{4-\frac{y-1}{2}}
+\binom{4}{\frac{y-1}{2}} &\quad \text{if } y \in \{1,3,5,7,9\} \\ 
+0 &\quad \text{otherwise}
+\end{cases}
+.\] 
+\end{solution}
+
+\question[10] Find the pdf for the discrete r.v. $X$ whose cdf at the points
+$x=0,1,\ldots,6$ are given by $F_{X}(x) = x^3 / 216$.
+
+\begin{solution}
+We know 
+
+\[
+P(x) = F_{X}(x) - F_{X}(x - 1)
+.\] 
+
+Thus,
+
+\begin{align*}
+    P(0) &= F_{X}(0) = 0 \\ 
+    P(1) &= F_{X}(1) - F_{X}(0) = \frac{1}{216} \\
+    P(2) &= F_{X}(2) - F_{X}(1) = \frac{7}{216} \\
+    P(3) &= F_{X}(3) - F_{X}(2) = \frac{19}{216} \\
+    P(4) &= F_{X}(4) - F_{X}(3) = \frac{37}{216} \\
+    P(5) &= F_{X}(5) - F_{X}(4) = \frac{61}{216} \\
+    P(6) &= F_{X}(6) - F_{X}(5) = \frac{91}{216} \\ 
+    P(x) &= 0 \quad \text{for } x \not\in \{1,2,3,4,5,6\}
+.\end{align*}
+\end{solution}
+
+\question[15] Suppose that $X$ has the pdf $f(x)=cx^2$ for $0\le x\le 1$ and
+$f(x) = 0$ otherwise.
+
+\begin{parts}
+\part Find $c$.
+
+\begin{solution}
+We know the corresponding cdf must sum to 1.
+
+\[
+\int_{0}^{1} cx^2 \, dx = 1 \implies c \cdot \frac{1}{3} = 1 \implies c = 3
+.\] 
+\end{solution}
+
+\part Find the cdf.
+
+\begin{solution}
+\[
+F(t) = \int_{0}^{t} f(x) \, dx = \int_{0}^{t} 3x^2 \, dx = t^3
+.\] 
+\end{solution}
+
+\part What is $P(0.1 \le X \le 0.5)$?
+
+\begin{solution}
+\[
+\int_{0.1}^{0.5} f(x) \, dx = 0.5^3 - 0.1^3 = 0.124
+.\] 
+\end{solution}
+\end{parts}
+
+\question[20] Let $X$ be a r.v. with the cdf $F(x) = 1 - x^{-\alpha}, x\ge 1$.
+
+\begin{parts}
+\part For what values of $\alpha$ is this a valid cdf?
+
+\begin{solution}
+Valid cdfs are increasing, right-continuous, and converge to $0$ and $1$ in the
+limits.
+
+Since $x\ge 1$ and pdf $f(x) = \frac{d}{dx}F(x) = \alpha x^{-\alpha-1} > 0 \implies
+\alpha > 0$, we know $\alpha > 0$.
+
+Since $1$ (a constant) and $-x^{-\alpha}$ are both continuous for all $\alpha$,
+the right-continuity condition doesn't set any bounds.
+
+$F(1) = 1 - 1^{-\alpha} = 0$ is true for all $\alpha$. $\lim_{x \to \infty} 
+F(x) = 1 - x^{-\alpha} = 1 \implies \alpha > 0$.
+
+Thus, we have that $\alpha > 0$.
+\end{solution}
+
+\part For what values of $\alpha$ is $E(X)$ finite? Find $E(X)$ for those values
+of $\alpha$ for which $E(X)$ exists.
+
+\begin{solution}
+\begin{align*}
+E(X) &= \int_{1}^{\infty} xf(x) \, dx  \\
+&= \int_{1}^{\infty} x\alpha x^{-\alpha-1} \, dx  \\
+&= \int_{1}^{\infty} \alpha x^{-\alpha} \, dx \\
+&= \lim_{x \to \infty} \frac{\alpha}{-\alpha + 1} x^{-\alpha + 1} - \frac{\alpha}{-\alpha + 1} 1^{-\alpha + 1} \\
+&= \lim_{x \to \infty} \frac{\alpha}{-\alpha + 1} x^{-\alpha + 1} - \frac{\alpha}{-\alpha + 1}
+.\end{align*}
+
+For $E(X)$ to be finite, we need $x^{-\alpha+1}$ to be finite as $x$ approaches
+0 and $-\alpha + 1 \neq 0$. Thus, $\alpha > 1$, and
+
+\[
+    E(X) = \frac{\alpha}{\alpha - 1}
+.\] 
+\end{solution}
+
+\part For what values of $\alpha$ is $Var(X)$ finite? Find $Var(X)$ for those
+values of $\alpha$ for which it exists.
+
+\begin{solution}
+\begin{align*}
+Var(X) &= E(X^2) - (E(X))^2 \\
+E(X^2) &= \int_{1}^{\infty} x^2f(x) \, dx  \\
+&= \int_{1}^{\infty} x^2\alpha x^{-\alpha-1} \, dx  \\
+&= \int_{1}^{\infty} \alpha x^{-\alpha + 1} \, dx \\
+&= \lim_{x \to \infty} \frac{\alpha}{-\alpha + 2} x^{-\alpha + 2} - \frac{\alpha}{-\alpha + 2} 1^{-\alpha + 2} \\
+&= \lim_{x \to \infty} \frac{\alpha}{-\alpha + 2} x^{-\alpha + 2} - \frac{\alpha}{-\alpha + 2}
+.\end{align*}
+
+For $Var(X)$ to be finite, we need $E(X^2)$ and $(E(X))^2$ to both be finite.
+For the latter, we have the same condition from part b, which is $\alpha > 1$.
+For the former, we need $x^{-\alpha+2}$ to be finite as $x$ approaches
+0 and $-\alpha + 2 \neq 0$. Thus, $\alpha > 2$, and
+
+\[
+    Var(X) = E(X^2) - (E(X))^2 = \frac{\alpha}{\alpha - 2} - \frac{\alpha^2}{\alpha^2 - 2\alpha + 1}
+.\] 
+\end{solution}
+
+\part Are the values of $\alpha$ the same for all parts above?
+
+\begin{solution}
+No?
+\end{solution}
+\end{parts}
+\end{questions}
+\end{document}
