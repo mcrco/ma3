@@ -48,21 +48,22 @@ X_{i} / N$. Thus, $\theta$ is the mean of the $X_{i}$.
 = \mathbb{E}[(\hat{\theta}-\theta)^2]$. Show that 
 
 \[
-\text{MSE}(\hat{\theta}) = \text{Var}(\theta) + \text{Bias}(\theta)^2
+\text{MSE}(\hat{\theta}) = \text{Var}(\hat{\theta}) + \text{Bias}(\hat{\theta})^2
 .\] 
 
 \begin{solution}
-Note that $\hat{\theta}$ is independent of $\theta$. Thus, we can take it out of
-any expected values w.r.t. $\theta$ as if it were a constant.
+Note that $\theta$, the true value, is independent of $\hat{\theta}$, our
+estimator. Thus, we can take it out of any expected values of $\gamma$ w.r.t.
+$\hat{\theta}$ as if it were a constant.
 
 \begin{align*}
 \text{MSE}(\hat{\theta}) &= \mathbb{E}[(\hat{\theta}-\theta)^2] \\ 
 &= \mathbb{E}[\hat{\theta}^2 - 2\theta \hat{\theta} + \theta^2] \\ 
 &= \mathbb{E}[\hat{\theta}^2] - 2\mathbb{E}[\theta \hat{\theta}] + \mathbb{E}[\theta^2] \\ 
-&= \hat{\theta}^2 - 2\hat{\theta}\mathbb{E}[\theta] + \mathbb{E}[\theta^2] \\ 
-&= \hat{\theta}^2 - 2\hat{\theta}\mathbb{E}[\theta] + \mathbb{E}[\theta]^2 + \mathbb{E}[\theta^2] - \mathbb{E}[\theta]^2 \\ 
-&= (\mathbb{E}[\theta^2] - \mathbb{E}[\theta]^2) + (\hat{\theta} - \mathbb{E}[\theta])^2 \\ 
-&= \text{Var}(\theta) + \text{Bias}(\theta)^2
+&= \mathbb{E}[\hat{\theta}^2] - 2\theta\mathbb{E}[\hat{\theta}] + \theta^2 \\ 
+&= \theta^2 - 2\theta\mathbb{E}[\hat{\theta}] + \mathbb{E}[\hat{\theta}]^2 + \mathbb{E}[\hat{\theta^2}] - \mathbb{E}[\hat{\theta}]^2 \\ 
+&= (\mathbb{E}[\hat{\theta}^2] - \mathbb{E}[\hat{\theta}]^2) + (\mathbb{E}[\hat{\theta}] - \theta)^2 \\ 
+&= \text{Var}(\hat{\theta}) + \text{Bias}(\hat{\theta})^2
 .\end{align*}
 \end{solution}
 
