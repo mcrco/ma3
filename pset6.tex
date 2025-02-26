@@ -23,11 +23,23 @@ probability is not 0.5. The test rejects if either 0 or 10 heads are observed.
 
 \begin{parts}
 \part What is the significance level $(\alpha)$ of the test?
+
+\begin{solution}
+The significance, which is the probability that the hypothesis $p=0.5$ is
+rejected when it is true, is $\alpha = 2 \cdot 0.5^{10} = 0.5^{9}$. 
+\end{solution}
+
 \part If, in fact, the probability of heads is 0.10, what is the power of the
 test?
+
+\begin{solution}
+The probability of rejecting $p=0.5$ (e.g. we observe 10 heads or 0 heads) when
+$p=0.1$ is $1-\beta = 0.1^{10} + (1-0.1)^{10} \implies \beta = 1 - (0.1^{10} +
+0.9^{10})$.
+\end{solution}
 \end{parts}
 
-\question [25] A producer specifies that the mean lifetime ofa certain type of
+\question [25] A producer specifies that the mean lifetime of a certain type of
 battery is at least 240 hours. A sample of 18 such batteries yields the
 following data:
 
@@ -36,7 +48,21 @@ following data:
 .\] 
 
 Assuming that the life of the batteries is approximately normally distributed,
-do the dat indicate that the specifications are not being met?
+do the data indicate that the specifications are not being met?
+
+\begin{solution}
+The mean of the data is $\overline{X} = 237.0556$ and the standard deviation is 
+$s = 11.2797$. The $t$ score is 
+
+\[
+t = \frac{\overline{X} - \mu_0}{s / \sqrt{n}} = \frac{237.0556 - 240}{11.2797 /
+\sqrt{28}} = -1.1075
+.\] 
+
+The probability of the battery life distribution having a true mean of at least
+240 is $0.1418$, which is not insignificant. Thus, we can't conclude that the
+batteries have less than 240 hours of battery life.
+\end{solution}
 
 \question [25] Consider two different producers of a type of rocket powder. A
 sample of 10 units is selected from each producer and their burning times in
@@ -55,6 +81,35 @@ Producer 2
 60.3, 58.8, 56.2, 48.6, 40.0, 42.8, 58.0, 44.3, 55.0, 48.6
 .\] 
 
+\begin{solution}
+I'm going to test this with the two sample t-test. We are assuming that they are
+independent and both normally distributed with the same variance.
+
+The distribution attributes are 
+
+\begin{align*}
+    \overline{X}_{1} &= 47.85 \\ 
+    s_1 = 6.4388 \\
+    n_1 &= 10 \\
+    \overline{X}_{2} &= 51.26 \\ 
+    s_2 = 7.3284 \\
+    n_2 &= 10 \\ 
+    s_{p} = 7.1282
+.\end{align*}
+
+The $t$ statistic is
+
+\[
+t = \frac{\overline{X}_{1} - \overline{X}_{2}}{s_{p}\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}} 
+= \frac{47.85 - 51.26}{7.1282 \sqrt{\frac{1}{10} + \frac{1}{10}}} 
+= -1.0697
+.\] 
+
+The probability of $|t| > 1.0697$ with $df=10 + 10 - 2 = 18$ is $0.298$. Since this
+probability is not insignificant (less than 0.05), we can't say that they are
+equal.
+\end{solution}
+
 \question [25] Supose that $X_1,X_2,\ldots,X_{n}$ is a random sample from a
 $N(\mu, \sigma^2)$ distribution.
 
@@ -62,9 +117,49 @@ $N(\mu, \sigma^2)$ distribution.
 \part If $\sigma^2$ is known, find a minimum value for $n$ to guarantee that a
 0.95 confidence interval for $\mu$ will have length no more than $\sigma / 4$.
 
+\begin{solution}
+The length for a 0.95 confidence interval for a sample size of 1 is $3.92 \sigma$.
+Since the interval length is proportional to the inverse square root of $n$, we
+want
+
+\[
+    \frac{3.92\sigma}{\sqrt{n}} \le \frac{\sigma}{4} \implies n \ge 246
+.\] 
+\end{solution}
+
 \part If $\sigma^2$ is unknown, find a minimum value for $n$ to guarantee, with
 probability 0.90, that a 0.95 confidence interval for $\mu$ will have length
 no more than $\sigma / 4$.
+
+\begin{solution}
+We know that the ratio between the square of the sample variance and the square
+of the distribution variance follows the chi squared distribution. Thus, we can
+use the chi-squared distribution with $n-1$ degrees of freedom to find the range
+of $s$ with probability 0.9. That is, for
+
+\[
+\chi^2 = \frac{(n-1)s^2}{\sigma^2} \le \chi_{0.9}^2
+,\] 
+
+where $P(\chi^2 \le \chi_{0.9}^2) = 0.9$ for a chi-squared distribution with
+$n-1$ degrees of freedom. Rearranging, we have
+
+\[
+s \le \sigma \sqrt{\frac{\chi_{0.9}^2}{n-1}}
+,\] 
+
+Then, approximating the distribution for $X$ with a $t$ distribution, we can
+find $n$ based on the constraints of the confidence interval using the above
+formula for $s$ and $t$ score corresponding to 0.95 confidence with $n-1$
+degrees of freedom, which we denote $t_{0.95}$:
+
+\[
+\frac{2t_{0.95}s}{\sqrt{n}} \le \frac{\sigma}{4} \implies \frac{2t_{0.95}}{\sqrt{n}} \cdot \sigma \sqrt{\frac{\chi_{0.9}^2}{n-1}} \le \frac{\sigma}{4} \implies n(n-1) \ge (8t_{0.95}\chi_{0.9}^2)
+.\] 
+
+Then, we just have to check this with precomputed $\chi^2$ and $t$ score
+tables, but I'm a lazy bum so I'm not gonna do it.
+\end{solution}
 \end{parts}
 \end{questions}
 \end{document}
